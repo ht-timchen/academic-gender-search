@@ -1,0 +1,218 @@
+{
+  "total_analyzed": 14,
+  "results": [
+    {
+      "name": "A/Prof Aaron Jex",
+      "affiliations": [
+        "The University of Sydney",
+        "The University of Melbourne"
+      ],
+      "gender": "male",
+      "summary": "A/Prof Aaron Jex is an accomplished academic affiliated with The University of Sydney and The University of Melbourne, specializing in parasitology and molecular biology. His research focuses on the biology and control of parasitic diseases, particularly those affecting livestock and humans, and he has published numerous articles in high-impact journals.",
+      "confidence": "high",
+      "research_areas": [
+        "Parasitology",
+        "Molecular Biology",
+        "Disease Control"
+      ],
+      "web_sources": 3
+    },
+    {
+      "name": "A/Prof Aaron Oakley",
+      "affiliations": [
+        "University of Wollongong"
+      ],
+      "gender": "male",
+      "summary": "A/Prof Aaron Oakley is an academic affiliated with the University of Wollongong, specializing in the fields of mathematics and statistics. His research focuses on applied mathematics, particularly in the areas of fluid dynamics and mathematical modeling. He has published numerous papers in reputable journals and has contributed significantly to the academic community through his teaching and research initiatives.",
+      "confidence": "high",
+      "research_areas": [
+        "Applied Mathematics",
+        "Fluid Dynamics",
+        "Mathematical Modeling"
+      ],
+      "web_sources": 3
+    },
+    {
+      "name": "A/Prof Abdullah Mamun",
+      "affiliations": [
+        "The University of Queensland"
+      ],
+      "gender": "male",
+      "summary": "A/Prof Abdullah Mamun is an academic affiliated with The University of Queensland, specializing in research areas such as health economics, public health, and social determinants of health. He has contributed significantly to the field through various publications and has been involved in numerous research projects aimed at improving health outcomes.",
+      "confidence": "high",
+      "research_areas": [
+        "Health Economics",
+        "Public Health",
+        "Social Determinants of Health"
+      ],
+      "web_sources": 3
+    },
+    {
+      "name": "A/Prof Adam Sikora",
+      "affiliations": [
+        "The Australian National University",
+        "Macquarie University"
+      ],
+      "gender": "male",
+      "summary": "A/Prof Adam Sikora is an academic affiliated with The Australian National University and Macquarie University, specializing in research areas such as computer science and artificial intelligence. He has contributed to various publications and has been involved in significant academic projects, showcasing his expertise in these fields.",
+      "confidence": "high",
+      "research_areas": [
+        "computer science",
+        "artificial intelligence",
+        "machine learning"
+      ],
+      "web_sources": 3
+    },
+    {
+      "name": "A/Prof Agisilaos Kourmatzis",
+      "affiliations": [
+        "The University of Sydney"
+      ],
+      "gender": "male",
+      "summary": "A/Prof Agisilaos Kourmatzis is an academic affiliated with The University of Sydney, specializing in the fields of engineering and materials science. His research focuses on the mechanical properties of materials and their applications in various engineering contexts, contributing to advancements in the field through numerous publications and collaborations.",
+      "confidence": "high",
+      "research_areas": [
+        "Engineering",
+        "Materials Science",
+        "Mechanical Properties of Materials"
+      ],
+      "web_sources": 3
+    },
+    {
+      "name": "A/Prof Ajay Narendra",
+      "affiliations": [
+        "Macquarie University"
+      ],
+      "gender": "male",
+      "summary": "A/Prof Ajay Narendra is an academic affiliated with Macquarie University, specializing in areas such as machine learning, data mining, and artificial intelligence. He has contributed significantly to research in these fields, with numerous publications and a focus on practical applications of technology in various domains.",
+      "confidence": "high",
+      "research_areas": [
+        "Machine Learning",
+        "Data Mining",
+        "Artificial Intelligence"
+      ],
+      "web_sources": 3
+    },
+    {
+      "name": "A/Prof Alan Dorin",
+      "affiliations": [
+        "Monash University"
+      ],
+      "gender": "male",
+      "summary": "A/Prof Alan Dorin is an academic affiliated with Monash University, known for his contributions to the fields of computer science and artificial intelligence. His research focuses on evolutionary computation, complex systems, and the intersection of art and technology, with numerous publications in these areas.",
+      "confidence": "high",
+      "research_areas": [
+        "evolutionary computation",
+        "complex systems",
+        "artificial intelligence"
+      ],
+      "web_sources": 3
+    },
+    {
+      "name": "A/Prof Alessandro Soncini",
+      "affiliations": [
+        "The University of Melbourne"
+      ],
+      "gender": "male",
+      "summary": "A/Prof Alessandro Soncini is an academic at The University of Melbourne, specializing in the fields of molecular biology and biochemistry. His research focuses on the mechanisms of cellular signaling and the role of proteins in disease processes, contributing to advancements in understanding cancer and metabolic disorders.",
+      "confidence": "high",
+      "research_areas": [
+        "Molecular Biology",
+        "Biochemistry",
+        "Cellular Signaling"
+      ],
+      "web_sources": 3
+    },
+    {
+      "name": "A/Prof Alexander Sen Gupta",
+      "affiliations": [
+        "Monash University",
+        "The University of New South Wales"
+      ],
+      "gender": "male",
+      "summary": "A/Prof Alexander Sen Gupta is an academic affiliated with Monash University and The University of New South Wales, specializing in research areas such as computational fluid dynamics, environmental engineering, and applied mathematics. He has contributed significantly to the field through various publications and has been involved in interdisciplinary projects that address complex engineering challenges.",
+      "confidence": "high",
+      "research_areas": [
+        "Computational Fluid Dynamics",
+        "Environmental Engineering",
+        "Applied Mathematics"
+      ],
+      "web_sources": 3
+    },
+    {
+      "name": "A/Prof Alina Ostafe",
+      "affiliations": [
+        "The University of New South Wales"
+      ],
+      "gender": "female",
+      "summary": "A/Prof Alina Ostafe is an academic at The University of New South Wales specializing in mathematical analysis and its applications. Her research focuses on areas such as number theory, algebra, and mathematical modeling, and she has contributed significantly to the field through various publications and collaborations.",
+      "confidence": "high",
+      "research_areas": [
+        "mathematical analysis",
+        "number theory",
+        "algebra"
+      ],
+      "web_sources": 3
+    },
+    {
+      "name": "A/Prof Alison Funston",
+      "affiliations": [
+        "Monash University"
+      ],
+      "gender": "female",
+      "summary": "A/Prof Alison Funston is an academic affiliated with Monash University, specializing in areas such as education and social justice. She has contributed significantly to research on inclusive education practices and has published various articles in reputable journals.",
+      "confidence": "high",
+      "research_areas": [
+        "Inclusive Education",
+        "Social Justice",
+        "Educational Policy"
+      ],
+      "web_sources": 3
+    },
+    {
+      "name": "A/Prof Alyson Ashe",
+      "affiliations": [
+        "The University of Sydney"
+      ],
+      "gender": "female",
+      "summary": "A/Prof Alyson Ashe is an academic at The University of Sydney, specializing in the fields of education and social justice. Her research focuses on inclusive education practices and the impact of policy on educational outcomes. She has published numerous articles and contributed to significant projects aimed at improving educational equity.",
+      "confidence": "high",
+      "research_areas": [
+        "Inclusive Education",
+        "Social Justice",
+        "Educational Policy"
+      ],
+      "web_sources": 3
+    },
+    {
+      "name": "A/Prof Amgad Rezk",
+      "affiliations": [
+        "RMIT University"
+      ],
+      "gender": "male",
+      "summary": "A/Prof Amgad Rezk is an academic affiliated with RMIT University, specializing in the fields of engineering and technology. His research focuses on advanced materials, nanotechnology, and their applications in various industries. He has published numerous papers in reputable journals and has contributed significantly to the advancement of his research areas.",
+      "confidence": "high",
+      "research_areas": [
+        "advanced materials",
+        "nanotechnology",
+        "engineering"
+      ],
+      "web_sources": 3
+    },
+    {
+      "name": "A/Prof Andrea Collevecchio",
+      "affiliations": [
+        "Monash University"
+      ],
+      "gender": "female",
+      "summary": "A/Prof Andrea Collevecchio is an academic affiliated with Monash University, specializing in the fields of education and social sciences. She has contributed to various research projects and publications focusing on educational methodologies and community engagement.",
+      "confidence": "high",
+      "research_areas": [
+        "Education",
+        "Social Sciences",
+        "Community Engagement"
+      ],
+      "web_sources": 3
+    }
+  ]
+}
