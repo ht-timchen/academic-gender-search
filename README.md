@@ -1,6 +1,6 @@
-# UNDER CONSTRUCTION
+# WORK IN PROGRESS
 
-# Academic Gender Search Analysis
+## Academic Gender Search Analysis
 
 An interactive web application for analyzing gender distribution among chief investigators in academic research.
 
