@@ -282,6 +282,110 @@
             border-top: 1px solid #e9ecef;
         }
 
+        .admin-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            border: 2px solid #007acc;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            min-width: 250px;
+            display: none;
+        }
+
+        .admin-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #007acc;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 1001;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .admin-toggle:hover {
+            background: #005999;
+        }
+
+        .edit-mode .researcher-card {
+            position: relative;
+            border: 2px dashed #ddd;
+        }
+
+        .edit-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .gender-select {
+            padding: 3px 6px;
+            font-size: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+
+        .save-changes-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .save-changes-btn:hover {
+            background: #218838;
+        }
+
+        .export-btn {
+            background: #17a2b8;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 5px;
+            width: 100%;
+        }
+
+        .export-btn:hover {
+            background: #138496;
+        }
+
+        .changes-indicator {
+            background: #ffc107;
+            color: #856404;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .admin-panel h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 1rem;
+        }
+
         .loading {
             text-align: center;
             padding: 2rem;
@@ -317,6 +421,32 @@
     </style>
 </head>
 <body>
+    <!-- Admin Toggle Button -->
+    <button class="admin-toggle" onclick="toggleAdminPanel()" title="Admin Panel">⚙️</button>
+    
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <h4>Admin Panel</h4>
+        <div id="changesIndicator" class="changes-indicator" style="display: none;">
+            <span id="changesCount">0</span> changes pending
+        </div>
+        <div style="margin-bottom: 10px;">
+            <label>
+                <input type="checkbox" id="editModeToggle" onchange="toggleEditMode()"> 
+                Edit Mode
+            </label>
+        </div>
+        <button class="save-changes-btn" onclick="saveChanges()" id="saveBtn" disabled>
+            Save Changes to Memory
+        </button>
+        <button class="export-btn" onclick="exportJSON()">
+            Export Updated JSON
+        </button>
+        <div style="margin-top: 10px; font-size: 0.75rem; color: #666;">
+            Click "Edit Mode" to modify gender assignments. Changes are saved locally until exported.
+        </div>
+    </div>
+
     <div class="container">
         <header>
             <h1>Chief Investigators Analysis</h1>
@@ -387,6 +517,9 @@
     <script>
         let allResearchers = [];
         let filteredResearchers = [];
+        let isEditMode = false;
+        let pendingChanges = {};
+        let changeCount = 0;
 
         // Load and parse the JSON data
         async function loadData() {
@@ -466,8 +599,17 @@
             container.style.display = 'grid';
             noResults.style.display = 'none';
 
-            container.innerHTML = filteredResearchers.map(researcher => `
-                <div class="researcher-card">
+            container.innerHTML = filteredResearchers.map((researcher, index) => `
+                <div class="researcher-card" data-index="${index}">
+                    ${isEditMode ? `
+                        <div class="edit-controls">
+                            <select class="gender-select" onchange="updateGender(${index}, this.value)" value="${researcher.gender}">
+                                <option value="male" ${researcher.gender === 'male' ? 'selected' : ''}>Male</option>
+                                <option value="female" ${researcher.gender === 'female' ? 'selected' : ''}>Female</option>
+                                <option value="unknown" ${researcher.gender === 'unknown' ? 'selected' : ''}>Unknown</option>
+                            </select>
+                        </div>
+                    ` : ''}
                     <div class="researcher-name">${escapeHtml(researcher.name)}</div>
                     
                     <div style="margin-bottom: 1rem;">
@@ -531,6 +673,121 @@
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
+        }
+
+        // Admin Panel Functions
+        function toggleAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function toggleEditMode() {
+            isEditMode = document.getElementById('editModeToggle').checked;
+            const container = document.getElementById('researchersContainer');
+            
+            if (isEditMode) {
+                container.classList.add('edit-mode');
+            } else {
+                container.classList.remove('edit-mode');
+            }
+            
+            renderResearchers(); // Re-render to show/hide edit controls
+        }
+
+        function updateGender(index, newGender) {
+            const researcher = filteredResearchers[index];
+            const originalIndex = allResearchers.findIndex(r => r.name === researcher.name);
+            
+            if (originalIndex !== -1) {
+                const originalGender = allResearchers[originalIndex].gender;
+                const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+                
+                // Create updated search notes
+                let updatedNotes = researcher.search_notes || '';
+                const manualAssignmentNote = `Gender manually assigned as '${newGender}' (previously '${originalGender}') on ${currentDate}.`;
+                
+                // Add or update the manual assignment note
+                if (updatedNotes.includes('Gender manually assigned')) {
+                    // Replace existing manual assignment note
+                    updatedNotes = updatedNotes.replace(/Gender manually assigned.*?\d{4}-\d{2}-\d{2}\./g, manualAssignmentNote);
+                } else {
+                    // Add new manual assignment note
+                    updatedNotes = updatedNotes ? `${updatedNotes} ${manualAssignmentNote}` : manualAssignmentNote;
+                }
+                
+                // Store the change
+                pendingChanges[researcher.name] = {
+                    originalGender: originalGender,
+                    originalNotes: allResearchers[originalIndex].search_notes,
+                    newGender: newGender,
+                    newNotes: updatedNotes,
+                    index: originalIndex
+                };
+                
+                // Update the display immediately
+                filteredResearchers[index].gender = newGender;
+                filteredResearchers[index].search_notes = updatedNotes;
+                
+                updateChangesIndicator();
+                renderResearchers();
+                updateStatistics();
+            }
+        }
+
+        function updateChangesIndicator() {
+            changeCount = Object.keys(pendingChanges).length;
+            const indicator = document.getElementById('changesIndicator');
+            const countSpan = document.getElementById('changesCount');
+            const saveBtn = document.getElementById('saveBtn');
+            
+            if (changeCount > 0) {
+                indicator.style.display = 'block';
+                countSpan.textContent = changeCount;
+                saveBtn.disabled = false;
+            } else {
+                indicator.style.display = 'none';
+                saveBtn.disabled = true;
+            }
+        }
+
+        function saveChanges() {
+            const savedCount = changeCount;
+            
+            // Apply all pending changes to the main data
+            Object.values(pendingChanges).forEach(change => {
+                allResearchers[change.index].gender = change.newGender;
+                allResearchers[change.index].search_notes = change.newNotes;
+            });
+            
+            // Clear pending changes
+            pendingChanges = {};
+            updateChangesIndicator();
+            
+            // Update display
+            updateStatistics();
+            
+            alert(`Successfully saved ${savedCount} gender corrections with audit trail to memory!`);
+        }
+
+        function exportJSON() {
+            // Create a copy of the original data structure
+            const exportData = {
+                total_analyzed: allResearchers.length,
+                results: allResearchers
+            };
+            
+            // Create and download the file
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = 'ci_short_search_results_updated.json';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            alert('Updated JSON file downloaded! You can replace the original file with this updated version.');
         }
 
         // Load data when page loads
