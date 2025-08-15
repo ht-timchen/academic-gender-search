@@ -4,7 +4,7 @@ An interactive web application for analyzing gender distribution among chief inv
 
 ## 🚀 Live Demo
 
-Visit the live application: [https://yourusername.github.io/academic-gender-search](https://yourusername.github.io/academic-gender-search)
+Visit the live application: [https://ht-timchen.github.io/academic-gender-search](https://ht-timchen.github.io/academic-gender-search)
 
 ## 📊 Overview
 
