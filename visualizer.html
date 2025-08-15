@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chief Investigators Analysis Visualizer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #ffffff;
+            color: #333;
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e5e5e5;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            padding: 1rem;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .controls {
+            background: #ffffff;
+            padding: 1rem;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        input, select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            background: #ffffff;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #333;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            background: #f5f5f5;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: #e5e5e5;
+        }
+
+        .researchers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1rem;
+        }
+
+        .researcher-card {
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            padding: 1rem;
+        }
+
+        .researcher-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .gender-badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .gender-male {
+            background: #e3f2fd;
+            color: #1565c0;
+            border-color: #bbdefb;
+        }
+
+        .gender-female {
+            background: #fce4ec;
+            color: #ad1457;
+            border-color: #f8bbd9;
+        }
+
+        .gender-unknown {
+            background: #f3e5f5;
+            color: #6a1b9a;
+            border-color: #e1bee7;
+        }
+
+        .confidence-badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        .confidence-high {
+            background: #e8f5e8;
+            color: #2e7d32;
+            border-color: #c8e6c9;
+        }
+
+        .confidence-medium {
+            background: #fff3e0;
+            color: #ef6c00;
+            border-color: #ffcc02;
+        }
+
+        .confidence-low {
+            background: #ffebee;
+            color: #c62828;
+            border-color: #ffcdd2;
+        }
+
+        .affiliations {
+            margin-bottom: 0.75rem;
+        }
+
+        .affiliation {
+            display: inline-block;
+            background: #f1f8e9;
+            padding: 0.2rem 0.5rem;
+            border: 1px solid #c5e1a5;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin: 0.2rem 0.2rem 0.2rem 0;
+            color: #388e3c;
+        }
+
+        .research-areas {
+            margin-bottom: 0.75rem;
+        }
+
+        .research-area {
+            display: inline-block;
+            background: #e8f4fd;
+            color: #0277bd;
+            padding: 0.2rem 0.5rem;
+            border: 1px solid #b3e5fc;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin: 0.2rem 0.2rem 0.2rem 0;
+        }
+
+        .summary {
+            color: #555;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-bottom: 0.75rem;
+        }
+
+        .summary.truncated {
+            max-height: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .summary.truncated::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(transparent, white);
+            pointer-events: none;
+        }
+
+        .summary.expanded {
+            max-height: none;
+        }
+
+        .expand-btn {
+            color: #0277bd;
+            cursor: pointer;
+            font-size: 0.75rem;
+            text-decoration: underline;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        .expand-btn:hover {
+            color: #01579b;
+        }
+
+        .search-stats {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .researchers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Chief Investigators Analysis</h1>
+            <p class="subtitle">Gender Analysis and Research Insights</p>
+        </header>
+
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalResearchers">-</div>
+                <div class="stat-label">Total Researchers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="maleCount">-</div>
+                <div class="stat-label">Male</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="femaleCount">-</div>
+                <div class="stat-label">Female</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="unknownCount">-</div>
+                <div class="stat-label">Unknown Gender</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="controls-grid">
+                <div class="form-group">
+                    <label for="searchInput">Search Researchers</label>
+                    <input type="text" id="searchInput" placeholder="Search by name, affiliation, or research area...">
+                </div>
+                <div class="form-group">
+                    <label for="genderFilter">Filter by Gender</label>
+                    <select id="genderFilter">
+                        <option value="">All Genders</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="confidenceFilter">Filter by Confidence</label>
+                    <select id="confidenceFilter">
+                        <option value="">All Confidence Levels</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button class="btn" onclick="resetFilters()">Reset Filters</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="loadingMessage" class="loading">
+            Loading data...
+        </div>
+
+        <div id="researchersContainer" class="researchers-grid" style="display: none;">
+        </div>
+
+        <div id="noResults" class="no-results" style="display: none;">
+            No researchers found matching your criteria.
+        </div>
+    </div>
+
+    <script>
+        let allResearchers = [];
+        let filteredResearchers = [];
+
+        // Load and parse the JSON data
+        async function loadData() {
+            try {
+                const response = await fetch('ci_short_search_results.json');
+                const data = await response.json();
+                allResearchers = data.results;
+                filteredResearchers = [...allResearchers];
+                
+                updateStatistics();
+                renderResearchers();
+                document.getElementById('loadingMessage').style.display = 'none';
+                document.getElementById('researchersContainer').style.display = 'grid';
+                
+                // Add event listeners
+                setupEventListeners();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('loadingMessage').innerHTML = 'Error loading data. Please make sure ci_short_search_results.json is in the same directory.';
+            }
+        }
+
+        function setupEventListeners() {
+            document.getElementById('searchInput').addEventListener('input', filterResearchers);
+            document.getElementById('genderFilter').addEventListener('change', filterResearchers);
+            document.getElementById('confidenceFilter').addEventListener('change', filterResearchers);
+        }
+
+        function updateStatistics() {
+            const total = allResearchers.length;
+            const genderCounts = allResearchers.reduce((acc, researcher) => {
+                acc[researcher.gender] = (acc[researcher.gender] || 0) + 1;
+                return acc;
+            }, {});
+
+            document.getElementById('totalResearchers').textContent = total;
+            document.getElementById('maleCount').textContent = genderCounts.male || 0;
+            document.getElementById('femaleCount').textContent = genderCounts.female || 0;
+            document.getElementById('unknownCount').textContent = genderCounts.unknown || 0;
+        }
+
+        function filterResearchers() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const genderFilter = document.getElementById('genderFilter').value;
+            const confidenceFilter = document.getElementById('confidenceFilter').value;
+
+            filteredResearchers = allResearchers.filter(researcher => {
+                // Search filter
+                const matchesSearch = !searchTerm || 
+                    researcher.name.toLowerCase().includes(searchTerm) ||
+                    researcher.affiliations.some(aff => aff.toLowerCase().includes(searchTerm)) ||
+                    researcher.research_areas.some(area => area.toLowerCase().includes(searchTerm)) ||
+                    researcher.summary.toLowerCase().includes(searchTerm);
+
+                // Gender filter
+                const matchesGender = !genderFilter || researcher.gender === genderFilter;
+
+                // Confidence filter
+                const matchesConfidence = !confidenceFilter || researcher.confidence === confidenceFilter;
+
+                return matchesSearch && matchesGender && matchesConfidence;
+            });
+
+            renderResearchers();
+        }
+
+        function renderResearchers() {
+            const container = document.getElementById('researchersContainer');
+            const noResults = document.getElementById('noResults');
+
+            if (filteredResearchers.length === 0) {
+                container.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            container.style.display = 'grid';
+            noResults.style.display = 'none';
+
+            container.innerHTML = filteredResearchers.map(researcher => `
+                <div class="researcher-card">
+                    <div class="researcher-name">${escapeHtml(researcher.name)}</div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <span class="gender-badge gender-${researcher.gender}">${researcher.gender}</span>
+                        <span class="confidence-badge confidence-${researcher.confidence}">${researcher.confidence} confidence</span>
+                    </div>
+
+                    <div class="affiliations">
+                        ${researcher.affiliations.map(aff => 
+                            `<span class="affiliation">${escapeHtml(aff)}</span>`
+                        ).join('')}
+                    </div>
+
+                    <div class="research-areas">
+                        ${researcher.research_areas.map(area => 
+                            `<span class="research-area">${escapeHtml(area)}</span>`
+                        ).join('')}
+                    </div>
+
+                    <div class="summary ${researcher.summary.length > 300 ? 'truncated' : ''}" id="summary-${researcher.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '')}">
+                        ${escapeHtml(researcher.summary)}
+                    </div>
+                    ${researcher.summary.length > 300 ? 
+                        `<div class="expand-btn" onclick="toggleSummary('summary-${researcher.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '')}')">Read more...</div>` 
+                        : ''
+                    }
+
+                    <div class="search-stats">
+                        Sources found: ${researcher.web_sources_found} | 
+                        Search successful: ${researcher.search_successful ? 'Yes' : 'No'}
+                        ${researcher.search_notes ? `<br>Notes: ${escapeHtml(researcher.search_notes)}` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleSummary(summaryId) {
+            const summary = document.getElementById(summaryId);
+            const btn = summary.parentElement.querySelector('.expand-btn');
+            
+            if (summary.classList.contains('truncated')) {
+                summary.classList.remove('truncated');
+                summary.classList.add('expanded');
+                btn.textContent = 'Read less...';
+            } else {
+                summary.classList.remove('expanded');
+                summary.classList.add('truncated');
+                btn.textContent = 'Read more...';
+            }
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('genderFilter').value = '';
+            document.getElementById('confidenceFilter').value = '';
+            filteredResearchers = [...allResearchers];
+            renderResearchers();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Load data when page loads
+        window.addEventListener('load', loadData);
+    </script>
+</body>
+</html>
