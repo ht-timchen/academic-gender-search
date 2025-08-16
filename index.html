@@ -77,12 +77,36 @@
         <h1>Academic Gender Search Analysis</h1>
         
         <div class="description">
-            <p>This project analyzes the gender distribution among chief investigators in academic research. The interactive visualizer provides insights into researcher demographics, affiliations, and research areas.</p>
+            <p><strong>🚧 Work in Progress:</strong> This project analyzes the gender distribution among chief investigators in academic research. The interactive visualizer provides insights into researcher demographics, affiliations, and research areas.</p>
         </div>
 
         <div class="stats">
-            <h3>📊 Dataset Overview</h3>
-            <p><strong>1,531 researchers</strong> analyzed with comprehensive gender analysis and research area categorization.</p>
+            <h3>📊 Current Dataset Statistics</h3>
+            <p><strong>2,679 researchers</strong> analyzed with comprehensive gender analysis and research area categorization.</p>
+            <ul>
+                <li><strong>Male:</strong> 1,436 (53.6%)</li>
+                <li><strong>Female:</strong> 564 (21.1%)</li>
+                <li><strong>Unknown:</strong> 679 (25.3%)</li>
+            </ul>
+            <p><strong>Web Search Success Rate:</strong> 94.4% (2,529/2,679 researchers)</p>
+            <p><strong>Total Sources Found:</strong> 10,206 (avg 3.8 per researcher)</p>
+        </div>
+
+        <div class="stats" style="border-left: 4px solid #e74c3c;">
+            <h3>🔬 Methodology</h3>
+            <p><strong>Gender Identification:</strong> We use OpenAI's search-enabled models (gpt-4o-mini-search-preview) to perform web searches for each researcher and analyze names, pronouns, and publicly available information to determine gender identity.</p>
+            <p><strong>Research Areas:</strong> Extracted from web search results including academic profiles, publications, and institutional pages.</p>
+        </div>
+
+        <div class="stats" style="border-left: 4px solid #f39c12; background: #fdf6e3;">
+            <h3>⚠️ Important Disclaimer</h3>
+            <p><strong>We sincerely apologize for any gender misidentification.</strong> Gender identity is personal and complex, and our automated analysis may not always be accurate. We recognize that:</p>
+            <ul>
+                <li>Gender cannot always be determined from names or public information</li>
+                <li>Some individuals may use different pronouns or identify differently than our analysis suggests</li>
+                <li>Non-binary and other gender identities may not be properly represented in our current binary classification</li>
+            </ul>
+            <p><strong>📝 Request Corrections:</strong> If you are a researcher in this dataset and would like to update your gender information or research areas, please submit a correction request via our <a href="https://github.com/ht-timchen/academic-gender-search/issues" target="_blank" style="color: #007acc;">GitHub Issues page</a> or contact us directly.</p>
         </div>
 
         <div class="features">
@@ -113,7 +137,21 @@
             <h3>🛠️ Technical Details</h3>
             <p><strong>Built with:</strong> Pure HTML, CSS, and JavaScript</p>
             <p><strong>Data format:</strong> JSON with comprehensive researcher profiles</p>
+            <p><strong>AI Model:</strong> OpenAI GPT-4o-mini-search-preview with web search capabilities</p>
             <p><strong>Features:</strong> Client-side filtering, responsive design, interactive components</p>
+            <p><strong>Last Updated:</strong> <span id="lastUpdated">August 2024</span></p>
+        </div>
+
+        <div class="stats" style="border-left: 4px solid #27ae60; background: #f0f8f0;">
+            <h3>🤝 Contributing</h3>
+            <p>This is an open-source project aimed at promoting transparency in academic gender representation. We welcome contributions, corrections, and suggestions.</p>
+            <p><strong>How to help:</strong></p>
+            <ul>
+                <li>Report incorrect gender classifications</li>
+                <li>Suggest improvements to methodology</li>
+                <li>Contribute to data visualization features</li>
+                <li>Help expand the dataset</li>
+            </ul>
         </div>
     </div>
 </body>
