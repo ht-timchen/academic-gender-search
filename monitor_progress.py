@@ -1,67 +1,90 @@
 #!/usr/bin/env python3
+"""
+Monitor the progress of the gender analyzer script
+"""
 import json
 import time
 import os
 from datetime import datetime
 
-def monitor_progress():
-    """Monitor the progress of CI processing"""
-    
-    results_file = 'ci_short_search_results.json'
-    total_cis = 2679
-    
-    print("CI Gender Analyzer Progress Monitor")
-    print("=" * 50)
-    print(f"Target: {total_cis} CIs")
-    print("Press Ctrl+C to stop monitoring\n")
-    
+def get_progress_stats():
+    """Get current progress statistics"""
     try:
-        while True:
-            if os.path.exists(results_file):
-                try:
-                    with open(results_file, 'r') as f:
-                        data = json.load(f)
-                    
-                    processed = len(data.get('results', []))
-                    percentage = (processed / total_cis) * 100
-                    
-                    print(f"\r[{datetime.now().strftime('%H:%M:%S')}] Progress: {processed}/{total_cis} ({percentage:.1f}%) ", end="", flush=True)
-                    
-                    if processed > 0:
-                        latest = data['results'][-1]
-                        successful_searches = sum(1 for r in data['results'] if r.get('search_successful', False))
-                        success_rate = (successful_searches / processed) * 100
-                        
-                        if processed % 10 == 0:  # Detailed update every 10 CIs
-                            print(f"\n  Latest: {latest['name']}")
-                            print(f"  Success rate: {successful_searches}/{processed} ({success_rate:.1f}%)")
-                            print(f"  Estimated time remaining: {((total_cis - processed) * 2) / 60:.1f} minutes")
-                    
-                    if processed >= total_cis:
-                        print(f"\n🎉 Processing complete! {processed} CIs analyzed.")
-                        break
-                        
-                except json.JSONDecodeError:
-                    print(f"\r[{datetime.now().strftime('%H:%M:%S')}] Waiting for valid JSON...", end="", flush=True)
-                except Exception as e:
-                    print(f"\r[{datetime.now().strftime('%H:%M:%S')}] Error: {e}", end="", flush=True)
-            else:
-                print(f"\r[{datetime.now().strftime('%H:%M:%S')}] Waiting for results file...", end="", flush=True)
-            
-            time.sleep(5)  # Check every 5 seconds
-            
-    except KeyboardInterrupt:
-        print(f"\n\nMonitoring stopped.")
-        if os.path.exists(results_file):
-            try:
-                with open(results_file, 'r') as f:
-                    data = json.load(f)
-                processed = len(data.get('results', []))
-                print(f"Final count: {processed}/{total_cis} CIs processed")
-            except:
-                print("Could not read final count")
+        # Load cache file to check progress
+        with open('ci_short_search_cache.json', 'r') as f:
+            cache_data = json.load(f)
+        
+        results = cache_data.get('results', [])
+        total_analyzed = len(results)
+        
+        # Get gender distribution
+        gender_counts = {}
+        successful_searches = 0
+        total_sources = 0
+        
+        for result in results:
+            gender = result.get('gender', 'unknown')
+            gender_counts[gender] = gender_counts.get(gender, 0) + 1
+            if result.get('search_successful'):
+                successful_searches += 1
+            total_sources += result.get('web_sources_found', 0)
+        
+        return {
+            'total_analyzed': total_analyzed,
+            'gender_counts': gender_counts,
+            'successful_searches': successful_searches,
+            'total_sources': total_sources,
+            'last_processed': results[-1]['name'] if results else 'None'
+        }
+    except Exception as e:
+        return {'error': str(e)}
+
+def monitor_progress(interval=30):
+    """Monitor progress and display updates"""
+    print("🔍 Gender Analyzer Progress Monitor")
+    print("=" * 50)
+    
+    while True:
+        stats = get_progress_stats()
+        
+        if 'error' in stats:
+            print(f"❌ Error reading progress: {stats['error']}")
+            time.sleep(interval)
+            continue
+        
+        # Clear screen and show current status
+        os.system('clear' if os.name == 'posix' else 'cls')
+        
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"🔍 Gender Analyzer Progress Monitor - {current_time}")
+        print("=" * 60)
+        
+        print(f"📊 Total Analyzed: {stats['total_analyzed']} researchers")
+        print(f"👤 Last Processed: {stats['last_processed']}")
+        print()
+        
+        print("📈 Gender Distribution:")
+        for gender, count in stats['gender_counts'].items():
+            percentage = (count / stats['total_analyzed']) * 100 if stats['total_analyzed'] > 0 else 0
+            print(f"  {gender.capitalize()}: {count} ({percentage:.1f}%)")
+        print()
+        
+        success_rate = (stats['successful_searches'] / stats['total_analyzed'] * 100) if stats['total_analyzed'] > 0 else 0
+        avg_sources = (stats['total_sources'] / stats['total_analyzed']) if stats['total_analyzed'] > 0 else 0
+        
+        print("🔍 Search Statistics:")
+        print(f"  Successful searches: {stats['successful_searches']}/{stats['total_analyzed']} ({success_rate:.1f}%)")
+        print(f"  Total sources found: {stats['total_sources']}")
+        print(f"  Average sources per researcher: {avg_sources:.1f}")
+        print()
+        
+        print(f"⏱️  Next update in {interval} seconds... (Ctrl+C to stop)")
+        
+        try:
+            time.sleep(interval)
+        except KeyboardInterrupt:
+            print("\n\n👋 Monitoring stopped.")
+            break
 
 if __name__ == "__main__":
     monitor_progress()
-
-
