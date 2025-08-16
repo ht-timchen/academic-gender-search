@@ -85,32 +85,50 @@
         </div>
 
         <div class="stats">
-            <h3>📊 Current Dataset Statistics</h3>
-            <p><strong>2,679 Chief Investigators</strong> with 3+ Discovery Projects analyzed with comprehensive gender analysis and research area categorization.</p>
+            <h3>📊 Final Dataset Statistics</h3>
+            <p><strong>2,679 Chief Investigators</strong> with 3+ Discovery Projects analyzed using our comprehensive three-tier methodology.</p>
             <ul>
-                <li><strong>Male:</strong> 1,436 (53.6%)</li>
-                <li><strong>Female:</strong> 564 (21.1%)</li>
-                <li><strong>Unknown:</strong> 679 (25.3%)</li>
+                <li><strong>Male:</strong> 1,906 (71.1%)</li>
+                <li><strong>Female:</strong> 591 (22.1%)</li>
+                <li><strong>Unknown:</strong> 182 (6.8%)</li>
             </ul>
-            <p><strong>Web Search Success Rate:</strong> 94.4% (2,529/2,679 researchers)</p>
-            <p><strong>Total Sources Found:</strong> 10,206 (avg 3.8 per researcher)</p>
+            <p><strong>Analysis Method Breakdown:</strong></p>
+            <ul>
+                <li><strong>Web Search (Tier 1):</strong> 2,004 researchers (74.8%)</li>
+                <li><strong>Name-Based AI (Tier 2):</strong> 493 researchers (18.4%)</li>
+                <li><strong>Manual Review (Tier 3):</strong> Available for remaining 182 researchers</li>
+            </ul>
+            <p><strong>Total Sources Found:</strong> 10,206 web sources (avg 3.8 per researcher in Tier 1)</p>
         </div>
 
         <div class="stats" style="border-left: 4px solid #e74c3c;">
-            <h3>🔬 Methodology</h3>
-            <p><strong>Selection Criteria:</strong> To manage costs effectively, we focus our analysis on Chief Investigators with 3 or more Discovery Projects (DPs), representing the most active researchers in the Australian academic system.</p>
-            <p><strong>Gender Identification:</strong> We use OpenAI's search-enabled models (gpt-4o-mini-search-preview) to perform web searches for each researcher and analyze names, pronouns, and publicly available information to determine gender identity.</p>
-            <p><strong>Research Areas:</strong> Extracted from web search results including academic profiles, publications, and institutional pages.</p>
-            <p><strong>Total Cost:</strong> The entire analysis cost AUD $72.11 in OpenAI API usage, demonstrating cost-effective research methodology.</p>
+            <h3>🔬 Three-Tier Methodology</h3>
+            <p><strong>Selection Criteria:</strong> Analysis focuses on Chief Investigators with 3+ Discovery Projects, representing the most active researchers in the Australian academic system.</p>
+            
+            <p><strong>Tier 1 - Web Search Analysis (74.8%):</strong> OpenAI's search-enabled models (gpt-4o-mini-search-preview) perform web searches to find verified information about researchers, analyzing academic profiles, publications, and institutional pages for gender indicators.</p>
+            
+            <p><strong>Tier 2 - Name-Based AI Analysis (18.4%):</strong> For researchers where web search found no clear evidence, GPT-4o-mini analyzes name patterns and linguistic origins to make educated predictions. All Tier 2 results are clearly marked as speculative.</p>
+            
+            <p><strong>Tier 3 - Manual Review (6.8% remaining):</strong> Researchers can submit corrections through our GitHub Issues system for any misclassifications or to update remaining unknown cases.</p>
+            
+            <p><strong>Research Areas:</strong> Extracted from Tier 1 web search results including academic profiles, publications, and institutional pages.</p>
+            <p><strong>Total Cost:</strong> AUD $72.11 for Tier 1 + ~$14.50 for Tier 2 = ~$86.61 total for comprehensive analysis.</p>
         </div>
 
         <div class="stats" style="border-left: 4px solid #f39c12; background: #fdf6e3;">
-            <h3>⚠️ Important Disclaimer</h3>
-            <p><strong>We sincerely apologize for any gender misidentification.</strong> Gender identity is personal and complex, and our automated analysis may not always be accurate. We recognize that:</p>
+            <h3>⚠️ Important Disclaimer & Confidence Levels</h3>
+            <p><strong>We sincerely apologize for any gender misidentification.</strong> Gender identity is personal and complex, and our automated analysis may not always be accurate. Our methodology includes different confidence levels:</p>
+            <ul>
+                <li><strong>High Confidence (Tier 1):</strong> Based on verified web information with clear evidence</li>
+                <li><strong>Medium-Low Confidence (Tier 2):</strong> Name-based predictions clearly marked as speculative</li>
+                <li><strong>Unknown (Tier 3):</strong> Insufficient information for any reliable prediction</li>
+            </ul>
+            <p><strong>Limitations:</strong></p>
             <ul>
                 <li>Gender cannot always be determined from names or public information</li>
                 <li>Some individuals may use different pronouns or identify differently than our analysis suggests</li>
-                <li>Non-binary and other gender identities may not be properly represented in our current binary classification</li>
+                <li>Non-binary and other gender identities may not be properly represented in our current classification system</li>
+                <li>Tier 2 predictions are explicitly speculative and marked as such in the data</li>
             </ul>
             <p><strong>📝 Request Corrections:</strong> If you are a researcher in this dataset and would like to update your gender information or research areas, please submit a correction request via our <a href="https://github.com/ht-timchen/academic-gender-search/issues" target="_blank" style="color: #007acc;">GitHub Issues page</a> or contact us directly.</p>
         </div>
