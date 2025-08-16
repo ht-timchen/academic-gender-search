@@ -7,7 +7,7 @@
         "The University of Sydney",
         "The University of Melbourne"
       ],
-      "gender": "unknown",
+      "gender": "male",
       "summary": "Associate Professor Aaron Jex is a researcher specializing in waterborne diseases and molecular diagnostics. He is a Lab Head in the Population Health and Immunity Division at the Walter and Eliza Hall Institute and holds an Associate Professorship in Parasitology at The University of Melbourne. ([publish.csiro.au](https://www.publish.csiro.au/MA/fulltext/MA24021?utm_source=openai)) He has been involved in several National Health and Medical Research Council (NHMRC) funded projects, including leading a project on the molecular epidemiology of waterborne and zoonotic diseases. ([researchdata.edu.au](https://researchdata.edu.au/apr-aaron-jex/530673?utm_source=openai))",
       "confidence": "medium",
       "research_areas": [
@@ -17,7 +17,7 @@
       ],
       "web_sources_found": 3,
       "search_successful": true,
-      "search_notes": "Specific details about Associate Professor Aaron Jex's academic background and career highlights were not found in the available sources."
+      "search_notes": "Manually updated. Specific details about Associate Professor Aaron Jex's academic background and career highlights were not found in the available sources."
     },
     {
       "name": "A/Prof Aaron Oakley",
@@ -59,7 +59,7 @@
         "The Australian National University",
         "Macquarie University"
       ],
-      "gender": "unknown",
+      "gender": "male",
       "summary": "I found information about an Associate Professor Adam Sikora at Macquarie University in the School of Mathematical and Physical Sciences. However, I couldn't find specific details about his research areas, recent publications, or academic background. Additionally, I couldn't locate any information about an academic researcher named A/Prof Adam Sikora affiliated with The Australian National University.",
       "confidence": "low",
       "research_areas": [
@@ -67,7 +67,7 @@
       ],
       "web_sources_found": 1,
       "search_successful": false,
-      "search_notes": "Limited information found; no specific details about research areas, publications, or academic background."
+      "search_notes": "Manually updated. Limited information found; no specific details about research areas, publications, or academic background."
     },
     {
       "name": "A/Prof Agisilaos Kourmatzis",
@@ -125,7 +125,7 @@
       "affiliations": [
         "The University of Melbourne"
       ],
-      "gender": "unknown",
+      "gender": "male",
       "summary": "Associate Professor Alessandro Soncini is affiliated with the University of Melbourne's School of Chemistry. His research focuses on the theory of nanomaterials, particularly in the areas of single-molecule magnets and lanthanide complexes. He has authored several publications in these fields, including studies on magnetic anisotropy and electron density distribution in lanthanide complexes. ([chem.kuleuven.be](https://chem.kuleuven.be/en/research/qcpc/ton/group-members/alessandro-soncini?utm_source=openai), [muckrack.com](https://muckrack.com/alessandro-soncini?utm_source=openai))",
       "confidence": "low",
       "research_areas": [
@@ -135,7 +135,7 @@
       ],
       "web_sources_found": 3,
       "search_successful": true,
-      "search_notes": "Specific information about Associate Professor Alessandro Soncini's gender was not found in the available sources."
+      "search_notes": "Manually updated. Specific information about Associate Professor Alessandro Soncini's gender was not found in the available sources."
     },
     {
       "name": "A/Prof Alexander Sen Gupta",
@@ -263,7 +263,7 @@
         "The University of Western Australia",
         "Macquarie University"
       ],
-      "gender": "unknown",
+      "gender": "male",
       "summary": "A/Prof Andrew Piggott is an Associate Professor at Macquarie University's School of Natural Sciences, specializing in natural products chemistry and chemical biology. His research focuses on exploring the chemical and structural diversity of natural products to develop new drug leads and probes for biochemical pathways. He has been involved in projects related to next-generation antibiotics and chemical biology using natural product probes. ([mq.edu.au](https://www.mq.edu.au/research/research-centres-groups-and-facilities/groups/microbial-biodiscovery-group/our-people?utm_source=openai), [researchers.mq.edu.au](https://researchers.mq.edu.au/en/persons/andrew-piggott?popupshown=true&utm_source=openai))",
       "confidence": "low",
       "research_areas": [
@@ -273,7 +273,7 @@
       ],
       "web_sources_found": 3,
       "search_successful": true,
-      "search_notes": "Information about A/Prof Andrew Piggott's research areas and recent publications was found on Macquarie University's website. No specific information about his academic background or career highlights was found."
+      "search_notes": "Manually updated. Information about A/Prof Andrew Piggott's research areas and recent publications was found on Macquarie University's website. No specific information about his academic background or career highlights was found."
     },
     {
       "name": "A/Prof Andrzej Calka",
